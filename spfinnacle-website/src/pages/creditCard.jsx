@@ -1,10 +1,6 @@
-import React from "react";
-import Navbar from "../components/navbar";
-
 const CreditCard = () => {
   return (
-    <div className="bg-white text-center text-4xl">
-      <Navbar />
+    <div id='#credit-card' className='bg-white text-center text-4xl'>
       CreditCard
     </div>
   );

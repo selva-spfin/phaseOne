@@ -12,7 +12,6 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 import emailjs from '@emailjs/browser';
-import Navbar from '../components/navbar';
 
 const EnquiryForm = () => {
   const form = useRef();
@@ -40,8 +39,7 @@ const EnquiryForm = () => {
   something cool together`;
 
   return (
-    <div style={{ backgroundColor: colors.primaryColor }}>
-      <Navbar />
+    <div id='enquiry-form' style={{ backgroundColor: colors.primaryColor }}>
       <section className='container mx-auto  gap-4 p-4 md:flex  lg:py-14 '>
         <div className='  text-center  md:w-1/2 md:text-left'>
           {/* <Link to="/" className="flex justify-center md:block">

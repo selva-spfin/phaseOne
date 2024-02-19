@@ -1,12 +1,8 @@
-import React from "react";
-import Navbar from "../components/navbar";
-
 const AboutUs = () => {
   return (
-    <main>
-      <Navbar />
-      <section className=" bg-gradient-to-b from-[#EF2670]/60 p-10">
-        <p className="text-justify indent-14 text-[20px] font-medium leading-relaxed tracking-wider  text-[#2B75BC] first-letter:text-4xl first-letter:text-white">
+    <main id='aboutUs'>
+      <section className=' bg-gradient-to-b from-[#EF2670]/60 p-10'>
+        <p className='text-justify indent-14 text-[20px] font-medium leading-relaxed tracking-wider  text-[#2B75BC] first-letter:text-4xl first-letter:text-white'>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt non
           quasi perspiciatis dicta quae eos praesentium itaque alias possimus
           atque id, ea tempora soluta at quis, culpa inventore cumque officia

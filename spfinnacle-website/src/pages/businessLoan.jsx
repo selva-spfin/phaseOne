@@ -1,10 +1,6 @@
-import React from 'react';
-import Navbar from '../components/navbar';
-
 const BusinessLoan = () => {
   return (
-    <div className='bg-white text-center text-4xl'>
-      <Navbar />
+    <div id='#business-loan' className='bg-white text-center text-4xl'>
       Business Loan
     </div>
   );

@@ -23,7 +23,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
 
-        <Route path='/about-us' element={<AboutUs />} />
+        {/* <Route path='/about-us' element={<AboutUs />} />
         <Route path='/enquiry-form' element={<EnquiryForm />} />
         <Route path='/services' element={<Services />} />
         <Route path='/products' element={<Products />} />
@@ -36,7 +36,7 @@ function App() {
         <Route path='/mortgage-loan' element={<MortgageLoan />} />
         <Route path='/personal-loan' element={<PersonalLoan />} />
         <Route path='/car-loan' element={<PreOwnedCarLoan />} />
-        <Route path='/sub-product-page' element={<SubProductPage />} />
+        <Route path='/sub-product-page' element={<SubProductPage />} /> */}
       </Routes>
     </div>
   );
