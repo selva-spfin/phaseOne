@@ -1,4 +1,4 @@
-import { NavHashLink } from "react-router-hash-link";
+import { NavLink } from "react-router-dom";
 import mainLogo from "../assets/2.png";
 import { TfiMenu } from "react-icons/tfi";
 import { Fragment, useState } from "react";
@@ -7,7 +7,7 @@ import { loanItems, exploreItems } from "../constants/menus.js";
 import { colors } from "../constants/colors.js";
 import { Link, animateScroll as scroll } from "react-scroll";
 
-const Navbar = () => {
+const Navbar = ({ setMenuKey }) => {
   const toggleMenu = () => {
     const menu = document.getElementById("mobileMenu");
 
@@ -41,7 +41,7 @@ const Navbar = () => {
         <div className="flex items-center ">
           {/* ----------Logo Section---------> */}
 
-          <NavHashLink to="/" className="flex items-center cursor-pointer">
+          <NavLink to="/" className="flex items-center cursor-pointer">
             <Link>
               <img
                 className="h-16 w-16"
@@ -56,7 +56,7 @@ const Navbar = () => {
             >
               Finnacle
             </span>
-          </NavHashLink>
+          </NavLink>
           {/*----------------- Menu Icon--------------- */}
           <button
             onClick={toggleMenu}
@@ -109,7 +109,7 @@ const Navbar = () => {
                           className=" rounded-md px-4 py-2"
                         >
                           {({ active }) => (
-                            <NavHashLink
+                            <NavLink
                               to={subLoanItems.path}
                               className={`${
                                 active
@@ -118,7 +118,7 @@ const Navbar = () => {
                               }`}
                             >
                               {subLoanItems.name}
-                            </NavHashLink>
+                            </NavLink>
                           )}
                         </Menu.Item>
                       ))}
@@ -198,8 +198,11 @@ const Navbar = () => {
                           className=" rounded-md px-4 py-2"
                         >
                           {({ active }) => (
-                            <NavHashLink
+                            <NavLink
                               to={subExploreItems.path}
+                              onClick={() => {
+                                setMenuKey(subExploreItems?.id);
+                              }}
                               className={`${
                                 active
                                   ? "bg-[#EF2670] text-white"
@@ -207,7 +210,7 @@ const Navbar = () => {
                               }`}
                             >
                               {subExploreItems.name}
-                            </NavHashLink>
+                            </NavLink>
                           )}
                         </Menu.Item>
                       ))}

@@ -3,7 +3,7 @@ import { askedQuestions } from "../constants/faq.js";
 
 const FAQ = () => {
   return (
-    <div>
+    <div id="faq">
       <section className="flex  font-montserrat tracking-wide ">
         <div className="w-full overflow-hidden rounded-md  border border-[#2B75BC] ">
           {askedQuestions.map((question) => (

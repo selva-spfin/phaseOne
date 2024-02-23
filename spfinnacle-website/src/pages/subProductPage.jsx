@@ -1,9 +1,7 @@
+import React from "react";
+
 const SubProductPage = () => {
-  return (
-    <main>
-      <p>Sub-Product Page</p>
-    </main>
-  );
+  return <div>SubProductpage</div>;
 };
 
 export default SubProductPage;
