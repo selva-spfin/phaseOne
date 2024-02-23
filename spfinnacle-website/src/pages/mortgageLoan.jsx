@@ -1,8 +1,8 @@
 const MortgageLoan = () => {
   return (
-    <div id='mortgage-loan' className='bg-white text-center text-4xl'>
-      Mortgage Loan
-    </div>
+    <>
+      <div className="bg-white text-center text-4xl">mortage Loan</div>;
+    </>
   );
 };
 

@@ -3,9 +3,13 @@ import { bankImages } from "../constants/images.js";
 
 const PartnerSection = () => {
   return (
-    <div className=" grid-col-2 grid items-center  gap-6 px-5 py-8 md:grid-cols-3 lg:grid-cols-5">
+    <div className="grid grid-cols-3  items-center justify-items-center p-4 md:px-5 md:py-8 lg:grid-cols-5">
       {bankImages.map((image) => (
-        <img src={image} alt="partnerLogo"></img>
+        <img
+          src={image}
+          className="size-2/6 md:size-3/6"
+          alt="partnerLogo"
+        ></img>
       ))}
     </div>
   );

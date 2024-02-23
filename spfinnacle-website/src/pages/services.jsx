@@ -1,10 +1,10 @@
-import PartnerSection from '../components/partnerSection';
+import PartnerSection from "../components/partnerSection";
 
 const Services = () => {
   return (
-    <main id='services' className=''>
-      <section className='bg-[#EF2670]/70 p-10 text-white'>
-        <p className='text-justify indent-8 text-xl tracking-wider first-letter:text-4xl first-letter:text-[#2B75BC]'>
+    <main id="services">
+      <section className=" bg-[#EF2670]/70 p-10 text-white">
+        <p className="text-justify indent-8 text-xl tracking-wider first-letter:text-4xl first-letter:text-[#2B75BC]">
           Discover streamlined finance loan process services designed to
           simplify borrowing. Our platform offers a seamless application
           process, personalized loan options, and competitive interest rates.
@@ -14,7 +14,7 @@ const Services = () => {
           finance loan process services.
         </p>
       </section>
-      <section className='p-5'>
+      <section className="p-5">
         <PartnerSection />
       </section>
     </main>
