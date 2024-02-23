@@ -36,7 +36,7 @@ const TabLayout: React.FC = () => {
   };
 
   return (
-    <Tab.Navigator initialRouteName='Telecaller' screenOptions={{ headerShown: false }}>
+    <Tab.Navigator initialRouteName='Leads' screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name="OverView"
         component={OverView}

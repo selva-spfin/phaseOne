@@ -10,4 +10,5 @@ export const images = {
     ic_visible: require('../assets/images/ic_visible.png'),
     ic_invisible: require('../assets/images/ic_invisible.png'),
     ic_add: require('../assets/images/ic_add.png'),
+    ic_partner_info: require('../assets/images/ic_info.png'),
 }

@@ -1,34 +1,58 @@
-import { colors } from '../../constants/colors';
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import Pdf from 'react-native-pdf';
 
-const LeadDetails = ({ route, navigation }) => {
+const LeadDetails = ({ route }) => {
   const { lead } = route.params;
+  // console.log("leads", lead)
+  const assetArray = JSON.parse(lead.assets);
+  console.log("assetArray", assetArray)
 
-  const renderAsset = (asset) => (
-    <View key={asset.Leads_asset_id}>
-      <Text>Asset Name: {asset.asset_name}</Text>
-      <Text>Asset Path: {asset.asset_path}</Text>
-      <Text>Asset Status: {asset.asset_status}</Text>
-    </View>
-  );
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 10,backgroundColor:colors.pink }}>
-        <Text style={{ marginLeft: 20, fontSize: 20, fontWeight: 'bold' }}>Lead Details</Text>
-      </View>
-      <ScrollView style={{ padding: 10 }}>
-        <Text>First Name: {lead.First_Name}</Text>
-        <Text>Last Name: {lead.Last_Name}</Text>
+    <ScrollView style={styles.container}>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Lead Details:</Text>
+        <Text>Name: {lead.First_Name} {lead.Last_Name}</Text>
+        <Text>Email: {lead.Email}</Text>
         <Text>Mobile No: {lead.Mobile_No}</Text>
-        <Text>Company Name: {lead.Company_Name}</Text>
-        {/* Add more details as needed */}
-        <Text>Assets:</Text>
-        {/* {lead.assets.map((asset) => renderAsset(asset))} */}
-      </ScrollView>
-    </View>
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Assets:</Text>
+        {lead.assets.map((asset, index) => (
+          <View key={index} style={styles.assetContainer}>
+            <Text>{asset.asset_name}</Text>
+            <Pdf
+              source={{ uri: asset.asset_path }}
+              style={styles.pdf}
+            />
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  assetContainer: {
+    marginBottom: 10,
+  },
+  pdf: {
+    width: '100%',
+    height: 200,
+  },
+});
 
 export default LeadDetails;
