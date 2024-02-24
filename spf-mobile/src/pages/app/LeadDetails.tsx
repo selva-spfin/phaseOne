@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import PDFView from 'react-native-pdf';
 import { PermissionsAndroid } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 
@@ -102,6 +101,7 @@ const LeadDetails: React.FC<Props> = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
   gridContainer: {
     flexGrow: 1,
     padding: 10,
@@ -123,6 +123,26 @@ const styles = StyleSheet.create({
   },
   value: {
     marginLeft: 10,
+=======
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  assetContainer: {
+    marginBottom: 10,
+  },
+  pdf: {
+    width: '100%',
+    height: 200,
+>>>>>>> origin
   },
 });
 
