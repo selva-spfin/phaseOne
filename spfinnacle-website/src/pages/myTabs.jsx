@@ -10,10 +10,11 @@ function classNames(...classes) {
 function MyTabs() {
   return (
     <div className=" px-2 py-14 sm:px-0">
-      <Tab.Group>
+      <Tab.Group selectedIndex={1}>
         <Tab.List className="flex items-center max-w-max justify-around  space-x-6 rounded-xl bg-gray-300 p-5 transition-all duration-500  ">
           {exploreItems.map((items) => (
             <Tab
+              se
               className={({ selected }) =>
                 classNames(
                   "rounded p-2 text-lg font-medium leading-5 ",
