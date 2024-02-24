@@ -16,20 +16,20 @@ type Lead = {
 const Leads = ({navigation}:any) => {
   const [leadsList, setLeadsList] = useState<Lead[]>([]);
 
-  const fetchLeads =async()=>{
-    const res = await getLeadDetails();
-    console.log("res", res)
-    if (res?.statusCode === 200) {
-      setLeadsList(res?.Data || []);
-    }
-  }
-
-  useEffect( () => {
-    fetchLeads();
+  useEffect(() => {
+    axios
+      .get(`${BASE_URL}${paths.getLeads}`)
+      .then((res) => {
+        if (res?.data?.statusCode === 200) {
+          setLeadsList(res?.data?.data || []);
+        }
+        console.log("leads", res.data.data);
+      })
+      .catch((err) => {});
   }, []);
 
   const renderLeadItem = ({ item }: { item: any }) => (
-   <TouchableWithoutFeedback onPress={()=>{ navigation.navigate('leaddetails', { lead: item })}}>
+   <TouchableWithoutFeedback onPress={()=>{ navigation.navigate('leaddetails', { data: item })}}>
      <View style={styles.card}>
       <Text style={styles.cardText}>{item.First_Name} {item.Last_Name}</Text>
       <Text style={styles.cardText}>{item.Email}</Text>
