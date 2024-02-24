@@ -1,17 +1,18 @@
 import { Tab } from "@headlessui/react";
-import FAQ from "./faq";
-import Blog from "./blog";
-import Calculator from "./calculator";
+import FAQ from "../pages/faq";
+import Blog from "../pages/blog";
+import Calculator from "../pages/calculator";
 import { exploreItems } from "../constants/menus";
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function MyTabs() {
+function Explore({ selectedMenu }) {
   return (
-    <div className=" px-2 py-14 sm:px-0">
-      <Tab.Group selectedIndex={1}>
-        <Tab.List className="flex items-center max-w-max justify-around  space-x-6 rounded-xl bg-gray-300 p-5 transition-all duration-500  ">
+    <div id="explore" className=" px-2 py-14 sm:px-0">
+      <Tab.Group selectedIndex={selectedMenu}>
+        <Tab.List className="flex items-center max-w-max justify-around space-x-6 rounded-xl bg-gray-300 p-5 transition-all duration-500  ">
           {exploreItems.map((items) => (
             <Tab
               se
@@ -20,7 +21,7 @@ function MyTabs() {
                   "rounded p-2 text-lg font-medium leading-5 ",
 
                   selected
-                    ? "bg-[#EF2670] text-white shadow  focus:ring-2 focus:ring-[#2B75BC] focus:ring-offset-2  focus:outline-none   "
+                    ? "bg-[#EF2670] text-white shadow  focus:ring-2 focus:ring-[#2B75BC] focus:ring-offset-2  focus:outline-none "
                     : "text-white hover:bg-[#2B75BC] ",
                 )
               }
@@ -45,4 +46,4 @@ function MyTabs() {
   );
 }
 
-export default MyTabs;
+export default Explore;

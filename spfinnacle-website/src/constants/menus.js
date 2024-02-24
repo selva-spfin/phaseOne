@@ -11,16 +11,16 @@ export const exploreItems = [
   {
     id: 1,
     name: "Calculator",
-    path: "/calculator",
+    path: "/explore",
   },
   {
     id: 2,
     name: "FAQ",
-    path: "/faq",
+    path: "/explore",
   },
   {
     id: 3,
     name: "Blog",
-    path: "/blog",
+    path: "/explore",
   },
 ];

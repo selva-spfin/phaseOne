@@ -1,6 +1,6 @@
 const Calculator = () => {
   return (
-    <div>
+    <div id="calculator">
       <section className=" bg-white text-center text-3xl">Calculator</section>
     </div>
   );
