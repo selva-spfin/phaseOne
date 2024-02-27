@@ -3,8 +3,11 @@ import { View, Text, FlatList, StyleSheet, TouchableWithoutFeedback, Image } fro
 import axios from 'axios';
 import { BASE_URL, paths } from '../../services/api/apiURL';
 import { colors, getProfileStatusColor } from '../../constants/colors';
-import { getLeadDetails } from '../../services/helpers/LeadServices';
+import { formatLeadData, getLeadDetails } from '../../services/helpers/LeadServices';
 import { images } from '../../constants/images';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { fetchBankList, fetchProfileStatusList, selectBankList, selectProfileStatusList } from '../../services/store/reducers/LookupSlice';
 
 type Lead = {
   name: string;
@@ -15,21 +18,38 @@ type Lead = {
 
 const Leads = ({navigation}:any) => {
   const [leadsList, setLeadsList] = useState<Lead[]>([]);
+  const dispatch = useDispatch();
+  const bankList = useSelector(selectBankList);
+  const profileStatusList = useSelector(selectProfileStatusList);
 
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}${paths.getLeads}`)
-      .then((res) => {
-        if (res?.data?.statusCode === 200) {
-          setLeadsList(res?.data?.data || []);
-        }
-        console.log("leads", res.data.data);
-      })
-      .catch((err) => {});
+    dispatch(fetchBankList());
+    dispatch(fetchProfileStatusList());
+  }, [dispatch]);
+
+
+  useEffect(() => {
+    fetchLeads();
   }, []);
 
+  const fetchLeads=()=>{
+    axios
+    .get(paths?.getLeads)
+    .then((res) => {
+      if (res?.data?.statusCode === 200) {
+        setLeadsList(res?.data?.data || []);
+      }
+    })
+    .catch((err) => {
+      console.warn("errOR", `${BASE_URL}${paths.getLeads}`);
+    });
+  }
+
   const renderLeadItem = ({ item }: { item: any }) => (
-   <TouchableWithoutFeedback onPress={()=>{ navigation.navigate('leaddetails', { data: item })}}>
+   <TouchableWithoutFeedback onPress={()=>{ 
+    const leadData = formatLeadData(item, bankList, profileStatusList);
+    navigation.navigate('leaddetails', { data: leadData })
+   }}>
      <View style={styles.card}>
       <Text style={styles.cardText}>{item.First_Name} {item.Last_Name}</Text>
       <Text style={styles.cardText}>{item.Email}</Text>

@@ -31,6 +31,16 @@ const PartnerService = {
       throw error;
     }
   },
+
+  getPartnerDetails: async (Id:number) => {
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/lookup?type=profile_status`);
+      return response.data;
+    } catch (error) {
+      console.error('Error toggling partner status:', error);
+      throw error;
+    }
+  },
 };
 
 

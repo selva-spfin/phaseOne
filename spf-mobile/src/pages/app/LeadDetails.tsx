@@ -1,7 +1,10 @@
+import { images } from '../../constants/images';
+import { colors } from '../../constants/colors';
 import React, { useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableWithoutFeedback, Image, FlatList } from 'react-native';
 import { PermissionsAndroid } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
+import { camelCaseToName } from '../../services/helpers/commonHelpers';
 
 interface RouteParams {
   data: Record<string, any>;
@@ -17,10 +20,7 @@ const ASSET_BASE_URL = 'http://d6zg14cua4cuh.cloudfront.net/';
 
 const LeadDetails: React.FC<Props> = ({ route }) => {
   const { data } = route.params;
-  console.log("jsonObject", typeof data?.assets, data?.assets)
-
   const jsonObject = JSON.parse(data?.assets);
-  console.log("jsonObject", jsonObject)
 
   useEffect(() => {
     requestStoragePermission();
@@ -41,10 +41,9 @@ const LeadDetails: React.FC<Props> = ({ route }) => {
     }
   }
 
-  const downloadPdf = (url:string, fileName:string) => {
+  const downloadPdf = (url: string, fileName: string) => {
     const { config, fs } = RNFetchBlob;
     const DownloadDir = fs.dirs.DownloadDir;
-    console.log("download", url)
     return config({
       fileCache: true,
       addAndroidDownloads: {
@@ -55,7 +54,6 @@ const LeadDetails: React.FC<Props> = ({ route }) => {
     })
       .fetch('GET', url)
       .then(res => {
-           console.log('File downloaded to:', res.path());
         return res.path();
       })
       .catch(error => {
@@ -63,67 +61,72 @@ const LeadDetails: React.FC<Props> = ({ route }) => {
       });
   };
 
+  const renderGridItem = ({ item }:any) => {
+    const URL = ASSET_BASE_URL + item?.asset_path;
+    const fileName = data?.First_Name + "-" + item?.asset_name;
+    const type = item?.asset_path.split('.')[1];
+    console.warn(type);
+
+    return (
+      <TouchableWithoutFeedback onPress={() => { downloadPdf(URL, fileName) }}>
+        <View style={styles.gridItem}>
+          <Image source={images.ic_pdf} style={styles.pdfIcon} />
+          <Text>{camelCaseToName(item?.asset_name)}</Text>
+        </View>
+      </TouchableWithoutFeedback>
+    );
+  };
+
   return (
-    <View style={styles.gridContainer}>
-      {/* {Object.keys(data).map(key => (
-        key !== 'assets' && (
-          <View key={key} style={styles.gridItem}>
-            <Text style={styles.label}>{key}</Text>
-            <Text style={styles.value}>{data[key]}</Text>
-          </View>
-        )
-      ))} */}
-      <View style={{
-        flexGrow: 1,
-        padding: 10,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-      }}>
-        {
-          jsonObject.map((el: any) => {
-            const URL = ASSET_BASE_URL + el?.asset_path;
-            const fileName = data?.First_Name +"-"+ el?.asset_name
-            // const type = el?.asset_path.split('.')[1];
-            return (
-              <TouchableWithoutFeedback onPress={()=>{ downloadPdf(URL,fileName)}}>
-                <View style={{
-                height: 60, width: 60, backgroundColor: '#BDBDBD', marginBottom: 10, borderRadius: 5, marginHorizontal: 5
-              }}>
-                <Text>{el?.asset_name}</Text>
-              </View>
-              </TouchableWithoutFeedback>
-            )
-          })
-        }
+    <View style={styles.container}>
+      <View style={styles.row}>
+        <Text style={styles.label}>Name</Text>
+        <Text style={styles.value}>{data?.name}</Text>
       </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Email</Text>
+        <Text style={styles.value}>{data?.email}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Loan Amount</Text>
+        <Text style={styles.value}>{data?.loanAmount}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Phone Number</Text>
+        <Text style={styles.value}>{data?.phoneNumber}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Address</Text>
+        <Text style={styles.value}>{data?.address}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Company Name</Text>
+        <Text style={styles.value}>{data?.companyName}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Bank Name</Text>
+        <Text style={styles.value}>{data?.bankName}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Status</Text>
+        <Text style={styles.value}>{data?.status}</Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.label}>Employee Type</Text>
+        <Text style={styles.value}>{data?.Employee_Type}</Text>
+      </View>
+      <FlatList
+        data={jsonObject}
+        renderItem={renderGridItem}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={4} // Number of columns in the grid
+        contentContainerStyle={styles.gridContainer}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
-  gridContainer: {
-    flexGrow: 1,
-    padding: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    // elevation: 5,
-    backgroundColor: '#FFFFFF',
-    margin: 10,
-    borderRadius: 10
-  },
-  gridItem: {
-    width: '50%',
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  label: {
-    fontWeight: 'bold',
-    color: '#BDBDBD'
-  },
-  value: {
-    marginLeft: 10,
-=======
   container: {
     flex: 1,
     padding: 20,
@@ -142,7 +145,34 @@ const styles = StyleSheet.create({
   pdf: {
     width: '100%',
     height: 200,
->>>>>>> origin
+  },
+  row: {
+
+  },
+  label: {
+    fontWeight: 'bold',
+    marginRight: 5,
+    fontSize: 18,
+    color: colors.pink,
+    opacity: 0.7
+  },
+  value: {
+    marginVertical: 5,
+    fontSize: 16,
+    color: '#000'
+  },
+
+  gridContainer: {
+    padding: 10,
+  },
+  gridItem: {
+    margin: 5,
+    alignItems: 'center',
+  },
+  pdfIcon: {
+    width: 60,
+    height: 60,
+    tintColor: colors.pink,
   },
 });
 
