@@ -1,22 +1,22 @@
-// profilesSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { apiBaseUrl } from '../../../services/helpers/PartnerService';
 
-interface ProfileStatus {
-  Profile_Status_Id: number;
-  Status_Name: string;
+interface Bank {
+  Bank_ID: number;
+  Bank_Name: string;
 }
 
 interface ProfilesState {
   statusList: ProfileStatus[];
+  bankList: Bank[];
 }
 
 const initialState: ProfilesState = {
   statusList: [],
+  bankList: [],
 };
 
-// Define an asynchronous thunk to fetch the profile status list
-export const fetchProfileStatusList = createAsyncThunk(
+const fetchProfileStatusList = createAsyncThunk(
   'profiles/fetchProfileStatusList',
   async () => {
     try {
@@ -33,6 +33,23 @@ export const fetchProfileStatusList = createAsyncThunk(
   }
 );
 
+const fetchBankList = createAsyncThunk(
+  'profiles/fetchBankList',
+  async () => {
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/lookup?type=bank`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch bank list');
+      }
+
+      const data = await response.json();
+      return data as Bank[];
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const lookupSlice = createSlice({
   name: 'profiles',
   initialState,
@@ -41,11 +58,16 @@ const lookupSlice = createSlice({
     builder.addCase(fetchProfileStatusList.fulfilled, (state, action) => {
       state.statusList = action.payload;
     });
+
+    builder.addCase(fetchBankList.fulfilled, (state, action) => {
+      state.bankList = action.payload;
+    });
   },
 });
 
-export { fetchProfileStatusList };
+export { fetchProfileStatusList, fetchBankList };
 
-export const selectProfileStatusList = (state: { lookup: ProfilesState }) =>  state.lookup?.statusList
+export const selectProfileStatusList = (state: { lookup: ProfilesState }) => state.lookup?.statusList;
+export const selectBankList = (state: { lookup: ProfilesState }) => state.lookup?.bankList;
 
 export default lookupSlice.reducer;
