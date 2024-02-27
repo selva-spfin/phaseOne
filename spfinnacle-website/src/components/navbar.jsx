@@ -161,7 +161,19 @@ const Navbar = ({ setMenuKey }) => {
               </Link>
             </li>
 
-            <li>
+            <li className="gap-x-1  px-3 py-2 ">
+              <Link
+                smooth={true}
+                duration={500}
+                offset={-85}
+                to="explore"
+                className="hover:opacity-50"
+              >
+                Explore
+              </Link>
+            </li>
+
+            {/* <li>
               <Menu as="div" className="relative inline-block text-left">
                 <div>
                   <Menu.Button className="inline-flex w-full items-center justify-center gap-x-1  px-3 py-2  tracking-wide text-white   hover:opacity-50 xl:tracking-wider ">
@@ -218,7 +230,7 @@ const Navbar = ({ setMenuKey }) => {
                   </Menu.Items>
                 </Transition>
               </Menu>
-            </li>
+            </li> */}
 
             <li
               style={hoverStyle}

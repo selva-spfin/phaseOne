@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Footer from "../components/footer";
 import AboutUs from "./aboutUs";
 import Services from "./services";
@@ -7,16 +8,19 @@ import BusinessLoan from "./businessLoan";
 import Explore from "../components/explore";
 
 const Home = ({ selectedMenu }) => {
+  useEffect(() => {}, []);
+
   return (
     <>
       <main className=" *:font-montserrat">
         <BusinessLoan />
+
         <AboutUs />
+
         <Services />
         <Products />
         <Explore selectedMenu={selectedMenu} />
         <EnquiryForm />
-        <Footer />
       </main>
     </>
   );

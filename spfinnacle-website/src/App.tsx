@@ -32,19 +32,17 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/products" element={<Products />} />
         <Route path="/enquiry-form" element={<EnquiryForm />} />
-
         <Route
           path="/explore"
-          element={<Explore selectedMenu={selectedMenu} />}
+          element={<Explore />}
         />
-
-        <Route path="/business-loan" element={<BusinessLoan />} />
+        {/* <Route path="/business-loan" element={<BusinessLoan />} />
         <Route path="/sub-product-page" element={<SubProductPage />} />
         <Route path="/credit-card" element={<CreditCard />} />
         <Route path="/home-loan" element={<HomeLoan />} />
         <Route path="/mortgage-loan" element={<MortgageLoan />} />
         <Route path="/personal-loan" element={<PersonalLoan />} />
-        <Route path="/car-loan" element={<PreOwnedCarLoan />} />
+        <Route path="/car-loan" element={<PreOwnedCarLoan />} /> */}
       </Routes>
     </div>
   );

@@ -11,7 +11,10 @@ import {
 const PersonalLoan = () => {
   return (
     <>
-      <section className="px-10 py-8 sm:py-10 md:px-20 lg:py-14  ">
+      <section
+        id="personal-loan"
+        className="px-10 py-8 sm:py-10 md:px-20 lg:py-14  "
+      >
         <div className="container mx-auto rounded-xl border border-black bg-purple-800 p-10  text-white sm:p-16 ">
           <h2 className="pb-5 text-2xl sm:text-3xl">Apply For Personal Loan</h2>
           <h3 className="pb-5 text-xl sm:text-2xl">EMI Calculator</h3>

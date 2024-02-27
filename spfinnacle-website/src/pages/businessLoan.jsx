@@ -1,7 +1,10 @@
 const BusinessLoan = () => {
   return (
     <>
-      <div className="bg-white text-center text-4xl h-screen">
+      <div
+        id="business-loan"
+        className="bg-white text-center text-4xl h-screen"
+      >
         Business Loan
       </div>
       ;
