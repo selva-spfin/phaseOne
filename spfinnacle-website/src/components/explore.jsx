@@ -1,47 +1,37 @@
-import { Tab } from "@headlessui/react";
 import FAQ from "../pages/faq";
 import Blog from "../pages/blog";
 import Calculator from "../pages/calculator";
 import { exploreItems } from "../constants/menus";
+import { useState } from "react";
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+function Explore() {
+  const [selected, setSelected] = useState(1);
 
-function Explore({ selectedMenu }) {
+  const renderItem = (key) => {
+    switch (key) {
+      case 1:
+        return <Calculator />;
+      case 2:
+        return <FAQ />;
+      case 3:
+        return <Blog />;
+      default:
+        return null;
+    }
+  };
   return (
     <div id="explore" className=" px-2 py-14 sm:px-0">
-      <Tab.Group selectedIndex={selectedMenu}>
-        <Tab.List className="flex items-center max-w-max justify-around space-x-6 rounded-xl bg-gray-300 p-5 transition-all duration-500  ">
-          {exploreItems.map((items) => (
-            <Tab
-              se
-              className={({ selected }) =>
-                classNames(
-                  "rounded p-2 text-lg font-medium leading-5 ",
-
-                  selected
-                    ? "bg-[#EF2670] text-white shadow  focus:ring-2 focus:ring-[#2B75BC] focus:ring-offset-2  focus:outline-none "
-                    : "text-white hover:bg-[#2B75BC] ",
-                )
-              }
-            >
-              {items.name}
-            </Tab>
-          ))}
-        </Tab.List>
-        <Tab.Panels className="w-full mt-2">
-          <Tab.Panel>
-            <Calculator />
-          </Tab.Panel>
-          <Tab.Panel>
-            <FAQ />
-          </Tab.Panel>
-          <Tab.Panel>
-            <Blog />
-          </Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+      <div className="cursor-pointer flex justify-around uppercase text-xl font-medium ">
+        {exploreItems?.map((el) => (
+          <span
+            className={`${selected === el.id ? "underline underline-offset-4  text-[#EF2670] " : ""}`}
+            onClick={() => setSelected(el.id)}
+          >
+            {el.name}
+          </span>
+        ))}
+      </div>
+      {renderItem(selected)}
     </div>
   );
 }
