@@ -35,13 +35,13 @@ const Navbar = ({ setMenuKey }) => {
   return (
     <nav
       style={{ background: colors.gradientBackground }}
-      className="sticky top-0 z-50  *:font-montserrat *:transition-all *:duration-500 xl:border-b-[1px]"
+      className="*:font-montserrat sticky top-0  z-50 *:transition-all *:duration-500 xl:border-b-[1px]"
     >
       <div className="mx-auto  my-auto w-[94%]  items-center p-3 xl:flex  ">
         <div className="flex items-center ">
           {/* ----------Logo Section---------> */}
 
-          <NavLink to="/" className="flex items-center cursor-pointer">
+          <NavLink to="/" className="flex cursor-pointer items-center">
             <Link>
               <img
                 className="h-16 w-16"

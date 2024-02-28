@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Footer from "../components/footer";
+
 import AboutUs from "./aboutUs";
 import Services from "./services";
 import Products from "./products";

@@ -1,18 +1,9 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { colors } from "../constants/colors";
-import whatsappLogo from "../assets/WhatsappLogo.png";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFacebook,
-  faInstagram,
-  faYoutube,
-  faXTwitter,
-  faWhatsapp,
-} from "@fortawesome/free-brands-svg-icons";
-
+import whatsappIcon from "../assets/WhatsAppIcon.svg";
 import emailjs from "@emailjs/browser";
+import { socialMediaIcons } from "../constants/images";
 
 const EnquiryForm = () => {
   const form = useRef();
@@ -41,53 +32,35 @@ const EnquiryForm = () => {
 
   return (
     <div id="enquiry-form" style={{ backgroundColor: colors.primaryColor }}>
-      <section className="container mx-auto  gap-4 p-4 md:flex  lg:py-8 ">
-        <div className="  text-center  md:w-1/3 md:text-left">
-          <p className=" text-lg text-white lg:py-5 lg:text-2xl">{para}</p>
-          <div className="lg:mt-[325px]">
-            <Link>
-              <FontAwesomeIcon
-                className="h-6 w-6 p-4 text-white lg:h-10 lg:w-10 "
-                icon={faInstagram}
-              />
-            </Link>
-            <Link>
-              <FontAwesomeIcon
-                className="h-6 w-6 p-4 text-white lg:h-8 lg:w-8 "
-                icon={faWhatsapp}
-              />
-            </Link>
-            <Link>
-              <FontAwesomeIcon
-                className="h-6 w-6 p-4 text-white lg:h-8 lg:w-8 "
-                icon={faFacebook}
-              />
-            </Link>
-            <Link>
-              <FontAwesomeIcon
-                className="h-6 w-6 p-4 text-white lg:h-8 lg:w-8 "
-                icon={faYoutube}
-              />
-            </Link>
-            <Link>
-              <FontAwesomeIcon
-                className="h-6 w-6 p-4 text-white lg:h-8 lg:w-8 "
-                icon={faXTwitter}
-              />
+      <section className="container mx-auto p-4 lg:flex justify-between items-center  lg:py-8 ">
+        <div className="lg:w-2/3 ">
+          <p className="text-2xl text-white  ">{para}</p>
+          <div className="lg:mt-[325px]  lg:mb-5">
+            <Link className="flex gap-10">
+              {socialMediaIcons.map((icons) => (
+                <img
+                  src={icons}
+                  alt={icons}
+                  className="h-6 w-6 lg:h-8 lg:w-8 "
+                />
+              ))}
             </Link>
           </div>
+          <div className="text-white">
+            <p>PrivacyPolicy & TermsConditions</p>
+          </div>
         </div>
-        <div className="  rounded-3xl  bg-white p-5 lg:p-10  md:w-2/3 lg:h-[515px] h-auto">
+        <div className="  rounded-3xl  bg-white p-5 lg:p-6 lg:w-1/3 h-auto">
           <form
-            className="grid grid-flow-row lg:grid-cols-2 "
+            className="flex flex-col"
             action=""
             ref={form}
             onSubmit={sendEmail}
           >
-            <div className="flex flex-col">
+            <div className="mb-2 flex flex-col">
               <label
                 htmlFor="name"
-                className="mb-1 text-lg font-semibold text-[#2B75BC] md:text-xl  "
+                className="mb-1 text-lg font-semibold text-[#2B75BC]  "
               >
                 Your Name
               </label>
@@ -95,15 +68,15 @@ const EnquiryForm = () => {
                 type="text"
                 name="user_name"
                 id="name"
-                className="mb-2 w-11/12 rounded border-b border-gray-400 bg-transparent p-2 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] lg:w-10/12 lg:text-xl"
+                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-1 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670]  "
                 placeholder=" Full Name"
                 required
               />
             </div>
-            <div className="mb-3 flex flex-col">
+            <div className="mb-2 flex flex-col">
               <label
                 htmlFor="num"
-                className="mb-1 text-lg  font-semibold text-[#2B75BC] md:text-xl"
+                className="mb-1 text-lg  font-semibold text-[#2B75BC] "
               >
                 Mobile Number
               </label>
@@ -111,17 +84,17 @@ const EnquiryForm = () => {
                 type="tel"
                 name="user_number"
                 id="num"
-                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-2 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] lg:w-10/12 lg:text-xl"
+                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-1 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] "
                 placeholder="10 Digit Number"
                 required
                 minLength={10}
                 maxLength={10}
               />
             </div>
-            <div className="mb-3 flex flex-col">
+            <div className="mb-2 flex flex-col">
               <label
                 htmlFor="mail"
-                className="mb-1 text-lg font-semibold  text-[#2B75BC] md:text-xl"
+                className="mb-1 text-lg font-semibold  text-[#2B75BC] "
               >
                 Email Id
               </label>
@@ -129,16 +102,16 @@ const EnquiryForm = () => {
                 type="email"
                 name="user_email"
                 id="mail"
-                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-2 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] lg:w-10/12 lg:text-xl"
+                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-1 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670]  "
                 placeholder="Email Id"
                 required
               />
             </div>
 
-            <div className="mb-3 flex flex-col">
+            <div className="mb-2 flex flex-col">
               <label
                 htmlFor="pin"
-                className="mb-1 text-lg font-semibold  text-[#2B75BC] md:text-xl"
+                className="mb-1 text-lg font-semibold  text-[#2B75BC] "
               >
                 Pin Code
               </label>
@@ -146,23 +119,23 @@ const EnquiryForm = () => {
                 type="text"
                 name="user_pincode"
                 id="pin"
-                className=" mb-2 w-10/12  rounded border-b border-gray-400 bg-transparent p-2 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] lg:w-10/12 lg:text-xl"
+                className=" mb-2 w-10/12  rounded border-b border-gray-400 bg-transparent p-1 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] "
                 placeholder=" Pincode"
                 maxLength={6}
                 required
               />
             </div>
-            <div className="mb-3 flex flex-col">
+            <div className="mb-2 flex flex-col">
               <label
                 htmlFor="user-loan-type"
-                className="mb-1 text-lg font-semibold  text-[#2B75BC] md:text-xl"
+                className="mb-1 text-lg font-semibold  text-[#2B75BC] "
               >
                 Enquiry Type
               </label>
               <select
                 name="loan-type"
                 id="user-loan-type"
-                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-2 text-lg outline-none focus:border-none focus:text-black focus:ring-2  focus:ring-[#EF2670] lg:w-10/12 lg:text-xl"
+                className="mb-2 w-10/12 rounded border-b border-gray-400 bg-transparent p-1 text-lg outline-none focus:border-none focus:text-black focus:ring-2  focus:ring-[#EF2670] "
               >
                 <option value=" Select Loan type" selected required>
                   Select Loan type
@@ -174,28 +147,12 @@ const EnquiryForm = () => {
                 </option>
               </select>
             </div>
-            <div className="mb-3 flex flex-col">
-              <label
-                htmlFor="address"
-                className="mb-2 text-lg font-semibold  text-[#2B75BC] md:text-xl"
-              >
-                Your Address :
-              </label>
-              <textarea
-                name="user_address"
-                id="address"
-                cols="20"
-                rows="5"
-                className=" mb-1 w-full rounded-lg border border-gray-400 bg-transparent p-2 text-lg outline-none focus:border-none focus:ring-2  focus:ring-[#EF2670] lg:w-11/12 lg:text-xl"
-                placeholder="Contact Address"
-                required
-              ></textarea>
-            </div>
-            <div className="lg:col-start-2 lg:col-end-3">
+
+            <div>
               <button
                 // style={{ backgroundColor: colors.logoBlue }}
                 type="submit"
-                className=" overflow-hidden rounded-full border border-[#2B75BC] px-4 py-2 text-lg   text-[#2B75BC] transition-all  duration-500 hover:border-white hover:bg-[#EF2670]  hover:text-white hover:ring-[#EF2670] md:px-7 md:py-3 md:text-xl"
+                className=" overflow-hidden rounded-full border border-[#2B75BC] px-3 py-2 text-lg   text-[#2B75BC] transition-all  duration-500 hover:border-white hover:bg-[#EF2670]  hover:text-white hover:ring-[#EF2670]  "
               >
                 Request to Contact
               </button>
@@ -203,10 +160,14 @@ const EnquiryForm = () => {
           </form>
         </div>
       </section>
-      <div className="size-20 fixed right-5 bottom-8">
-        <Link to="/whatsapp-enquiry" target="_blank">
-          <img src={whatsappLogo} alt="enquiry-logo" />
-        </Link>
+      <div className="size-14 fixed right-5 bottom-8">
+        <a
+          href="https:/wa.me/+91and8012637346"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src={whatsappIcon} alt="enquiry-logo" />
+        </a>
       </div>
     </div>
   );

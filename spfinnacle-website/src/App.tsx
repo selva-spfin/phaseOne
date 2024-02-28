@@ -1,17 +1,12 @@
 import { Routes, Route } from "react-router-dom";
-
 import Home from "./pages/home";
-
 import AboutUs from "./pages/aboutUs";
 import EnquiryForm from "./pages/enquiryForm";
 import Services from "./pages/services";
 import Products from "./pages/products";
-
 import Navbar from "./components/navbar";
-
 import { useState } from "react";
 import Explore from "./components/explore";
-
 import WhatsappEnquiry from "./components/whatsappEnquiry";
 
 function App() {

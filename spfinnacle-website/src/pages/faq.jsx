@@ -4,7 +4,7 @@ import { askedQuestions } from "../constants/faq.js";
 const FAQ = () => {
   return (
     <div id="faq">
-      <section className="flex  font-montserrat tracking-wide mt-2 ">
+      <section className="flex container mx-auto font-montserrat tracking-wide mt-2 ">
         <div className="w-full overflow-hidden rounded-md  border border-[#B4B4B8] ">
           {askedQuestions.map((question) => (
             <div className="relative mt-[1px] rounded-md ">

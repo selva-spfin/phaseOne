@@ -16,6 +16,12 @@ import standardChartered from "../assets/bank-logos/Standard-chartered.png";
 import tata from "../assets/bank-logos/Tata-Capital.png";
 import ujjivan from "../assets/bank-logos/Ujjivan-small-finance-bank-.png";
 import yes from "../assets/bank-logos/Yes-bank.png";
+/*-----------Media Icons----------------*/
+import linkedinLogo from "../assets/social-media/Linkedin-Logo.svg";
+import twitterLogo from "../assets/social-media/Twitter-Logo.svg";
+import whatsappLogo from "../assets/social-media/Whatsapp-Logo.svg";
+import instagramLogo from "../assets/social-media/Instagram-Logo.svg";
+import facebookLogo from "../assets/social-media/Facebook-Logo.svg";
 
 export const bankImages = [
   aditya,
@@ -36,4 +42,12 @@ export const bankImages = [
   tata,
   ujjivan,
   yes,
+];
+
+export const socialMediaIcons = [
+  linkedinLogo,
+  twitterLogo,
+  whatsappLogo,
+  instagramLogo,
+  facebookLogo,
 ];
