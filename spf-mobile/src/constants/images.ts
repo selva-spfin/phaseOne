@@ -12,6 +12,7 @@ export const images = {
     ic_add: require('../assets/images/ic_add.png'),
     ic_back: require('../assets/images/ic_back.png'),
     ic_partner_info: require('../assets/images/ic_info.png'),
+    bg_card: require('../assets/images/bg_card.jpg'),
     ic_pdf: require('../assets/images/ic_download_pdf.png'),
     ic_image_download: require('../assets/images/ic_download_image.png'),
 }

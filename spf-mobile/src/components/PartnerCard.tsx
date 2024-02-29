@@ -66,8 +66,9 @@ const PartnerCard: React.FC<PartnerCardProps> = ({ user, changeStatus, statusLis
 
 const styles = StyleSheet.create({
   card: {
-    marginHorizontal: 15,
-    marginVertical: 5
+    marginHorizontal: 10,
+    marginTop: 10,
+    backgroundColor:'#FFF'
   },
   textItem: {
     fontSize: 16,

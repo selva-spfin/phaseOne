@@ -14,8 +14,8 @@ interface LoginValues {
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('Admin');
-  const [password, setPassword] = useState('Admin@123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);

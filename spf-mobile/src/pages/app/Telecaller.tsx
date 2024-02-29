@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Image, Alert, TouchableWithoutFeedback } from 'react-native';
 import { FAB, Portal, Provider, TextInput, Button } from 'react-native-paper';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import { images } from '../../constants/images';
@@ -7,6 +7,7 @@ import { colors } from '../../constants/colors';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import SPTextInput from '../../components/SPTextInput';
 
 interface TelecallerData {
   id: number;
@@ -34,8 +35,17 @@ const Telecaller: React.FC = () => {
     password: Yup.string().required('Password is required'),
   });
 
-  useEffect(()=>{
+  const getTelecaller=()=>{
+    axios.get('https://efskorntxa.execute-api.ap-south-1.amazonaws.com/Dev/api/admin/tellecaller').then((res)=>{
+      if(res?.data?.statusCode === 200){
+        setTelecallers(res?.data?.data || [])
+      }
 
+    }).catch(e=>{})
+  }
+
+  useEffect(()=>{
+    getTelecaller()
   },[])
 
   const onSubmit = (values:any, { resetForm }:any) => {
@@ -56,35 +66,45 @@ const Telecaller: React.FC = () => {
 
   axios.post('https://efskorntxa.execute-api.ap-south-1.amazonaws.com/Dev/api/admin/tellecaller', newTelecaller).then((res)=>{
   if(res?.status === 200){
-    Alert.alert('Telecaller created successfully')
+    Alert.alert('Telecaller created successfully');
+    getTelecaller();
     refRBSheet?.current?.close()
   }  
   }).catch((err)=> console.error(err))
-
-
-
-    // setTelecallers([...telecallers, newTelecaller]);
-    // hideBottomSheet();
-    // resetForm();
   };
 
-  const renderTelecallerItem = ({ item }: { item: TelecallerData }) => (
+  const renderTelecallerItem = ({ item }: any) => (
     <View style={styles.telecallerItem}>
-      <Text>{item.name}</Text>
-      <Text>{item.empId}</Text>
-      <Text>{item.phoneNumber}</Text>
+      <Text style={{color:colors.black,fontSize:16}}>{item.Name}</Text>
+      <Text style={{color:colors.black,fontSize:15}}>{item.Employee_Id}</Text>
+      <Text style={{color:colors.black,fontSize:15}}>{item.Mobile_Number}</Text>
     </View>
   );
 
   return (
     <Provider>
       <View style={styles.container}>
-        <FlatList
+      <View style={{ padding: 20, justifyContent: 'space-between',elevation:3,backgroundColor:'#EFEFEF', flexDirection:'row' }}>
+        <Text style={{ fontSize: 18, color: colors.pink, fontWeight:'bold'}}>TELECALLERS</Text>
+        <TouchableWithoutFeedback onPress={()=>{getTelecaller()}}>
+        <Text style={{color:colors.pink,fontWeight:'500'}}>Refresh</Text>
+        </TouchableWithoutFeedback>
+      </View>
+      {
+        telecallers?.length === 0 ?
+          <View style={{flex:0.9,justifyContent:'center',alignItems:'center', flexDirection:'row'}}>
+            <Image source={images.ic_partner_info} style={{height:28, width:28, tintColor:'#BDBDBD', marginHorizontal:20}} />
+            <Text style={{color:'#BDBDBD', fontSize:18}}>No More Partners</Text>
+          </View>
+          :
+          <FlatList
           data={telecallers}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item:any) => item.Tellecaller_Id.toString()}
           renderItem={renderTelecallerItem}
         />
 
+      }
+       
         <Portal>
           <FAB
             style={styles.fab}
@@ -95,92 +115,77 @@ const Telecaller: React.FC = () => {
             ref={refRBSheet}
             closeOnDragDown={true}
             closeOnPressMask={false}
-            height={600}
+            height={700}
             customStyles={{
               wrapper: {
-                backgroundColor: 'transparent',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
               },
               draggableIcon: {
-                backgroundColor: '#000',
+                backgroundColor: colors.pink,
               },
             }}
           >
             <Formik
               initialValues={{
-                designation: 'Telecaller',
-                email: 'abc@gmail.com',
-                employeeId: '121',
-                gender: 'Male',
-                mobileNumber: '7397316411',
-                name: 'Selvaa',
-                password: 'abc@123',
+                designation: '',
+                email: '',
+                employeeId: '',
+                gender: '',
+                mobileNumber: '',
+                name: '',
+                password: '',
               }}
               validationSchema={validationSchema}
               onSubmit={onSubmit}
             >
               {(formikProps) => (
                 <View style={styles.bottomSheet}>
-                   <TextInput
+                   <SPTextInput
                     label="Name"
-                    placeholder='#000'
-                    theme={{colors:{primary:colors.pink, text:'red', placeholder: colors.black}}}
                     value={formikProps.values.name}
                     onChangeText={formikProps.handleChange('name')}
-                    style={{backgroundColor:'transparent',marginTop:5,color:colors.pink}}
                     error={formikProps.touched.name && formikProps.errors.name}
                   />
-                  <TextInput
+                  <SPTextInput
                     label="Email"
                     value={formikProps.values.email}
-                    theme={{colors:{primary:colors.pink}}}
                     onChangeText={formikProps.handleChange('email')}
-                    style={{backgroundColor:'transparent',marginTop:5,color:'#000'}}
                     error={formikProps.touched.email && formikProps.errors.email}
                   />
-                  <TextInput
+                  <SPTextInput
                     label="Employee ID"
                     value={formikProps.values.employeeId}
-                    theme={{colors:{primary:colors.pink}}}
                     onChangeText={formikProps.handleChange('employeeId')}
-                    style={{backgroundColor:'transparent',marginTop:5,color:'#000'}}
                     error={formikProps.touched.employeeId && formikProps.errors.employeeId}
                   />
-                  <TextInput
+                  <SPTextInput
                     label="Gender"
                     value={formikProps.values.gender}
-                    theme={{colors:{primary:colors.pink}}}
                     onChangeText={formikProps.handleChange('gender')}
-                    style={{backgroundColor:'transparent',marginTop:5,color:'#000'}}
                     error={formikProps.touched.gender && formikProps.errors.gender}
                   />
-                  <TextInput
+                  <SPTextInput
                     label="Mobile Number"
                     value={formikProps.values.mobileNumber}
                     onChangeText={formikProps.handleChange('mobileNumber')}
                     keyboardType="numeric"
-                    theme={{colors:{primary:colors.pink}}}
-                    style={{backgroundColor:'transparent',marginTop:5,color:'#000'}}
                     error={formikProps.touched.mobileNumber && formikProps.errors.mobileNumber}
                   />
-                  <TextInput
+                  <SPTextInput
                     label="Designation"
                     value={formikProps.values.designation}
                     onChangeText={formikProps.handleChange('designation')}
-                    style={{backgroundColor:'transparent',marginTop:5,color:'#000'}}
-                    theme={{colors:{primary:colors.pink}}}
                     error={formikProps.touched.designation && formikProps.errors.designation}
                   />
-                  <TextInput
+                  <SPTextInput
                     label="Password"
                     value={formikProps.values.password}
                     onChangeText={formikProps.handleChange('password')}
                     secureTextEntry
-                    theme={{colors:{primary:colors.pink}}}
-                    style={{backgroundColor:'transparent',marginTop:5,color:'#000'}}
                     error={formikProps.touched.password && formikProps.errors.password}
                   />
-                  <Button style={styles.loginBtn} mode="contained" onPress={formikProps.handleSubmit}>
-                    Submit
+                  <Button textColor='#fff' style={styles.loginBtn} mode="contained" onPress={formikProps.handleSubmit}>
+                    CREATE TELECALLER
                   </Button>
                 </View>
               )}
@@ -200,6 +205,11 @@ const styles = StyleSheet.create({
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    marginHorizontal:5,
+    marginTop:10,
+    backgroundColor:'#FFF',
+    elevation:3,
+    borderRadius:10
   },
   fab: {
     position: 'absolute',
@@ -214,12 +224,13 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   loginBtn: {
-    width: '40%',
+    width: '60%',
     borderRadius: 10,
     alignSelf: 'center',
     backgroundColor: colors.pink,
     marginTop:20,
-    color:'white'
+    color:'white',
+    fontWeight:'500'
   },
 });
 

@@ -64,7 +64,7 @@ const Partner: React.FC = () => {
       <View style={{ padding: 20, justifyContent: 'space-between',elevation:3,backgroundColor:'#EFEFEF', flexDirection:'row' }}>
         <Text style={{ fontSize: 18, color: colors.pink, fontWeight:'bold'}}>PARTNER</Text>
         <TouchableWithoutFeedback onPress={()=>{fetchPartners()}}>
-        <Text style={{color:colors.gray}}>Refresh</Text>
+        <Text style={{color:colors.pink,fontWeight:'500'}}>Refresh</Text>
         </TouchableWithoutFeedback>
       </View>
       {
