@@ -15,6 +15,8 @@ import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
 import { CustomersSearch } from 'src/sections/customer/customers-search'
 import { applyPagination } from 'src/utils/apply-pagination'
 import CreateLead from 'src/components/createLead'
+import ChangeStatus from 'src/components/changeStatus'
+
 import { CreateLeadApi, CreateAssetApi, getLeadApi } from '../action/apiActions'
 import { useSelector } from 'react-redux'
 import CollapsibleTable from 'src/sections/customer/collapseRow'
@@ -35,6 +37,8 @@ const Page = () => {
   const [filteredData, setFilteredData] = useState(data)
   const profileData = useSelector(state => state.auth.authData)
 
+  console.log('profileData', profileData)
+
   const handlePageChange = useCallback((event, value) => {
     setPage(value)
   }, [])
@@ -47,6 +51,7 @@ const Page = () => {
     getLeadApi(
       profileData[0]?.Profile_Status_Id,
       profileData[0]?.User_Id,
+
       profileData[0]?.User_Role_Id,
       setLoading
     ).then(res => {
@@ -342,37 +347,55 @@ const Page = () => {
                   </Button>
                 </Stack> */}
               </Stack>
-              <div>
-                <Button
-                  onClick={() => setOpenModal(!openModal)}
-                  startIcon={
-                    <SvgIcon fontSize="small">
-                      <PlusIcon />
-                    </SvgIcon>
-                  }
-                  variant="contained"
-                >
-                  Create Lead
-                </Button>
-              </div>
+              {profileData && profileData[0]?.User_Role_Id === 2 && (
+                <div>
+                  <Button
+                    onClick={() => setOpenModal(!openModal)}
+                    startIcon={
+                      <SvgIcon fontSize="small">
+                        <PlusIcon />
+                      </SvgIcon>
+                    }
+                    variant="contained"
+                  >
+                    Create Lead
+                  </Button>
+                </div>
+              )}
             </Stack>
             <CustomersSearch
               data={customers}
               onSearch={handleSearch}
               placeholder="Search with Phone number"
             />
-            <CreateLead
-              open={openModal}
-              onClose={() => {
-                setOpenModal(!openModal)
-                setLeadEditdata([])
-              }}
-              loading={loading}
-              onSubmit={el => {
-                createLeadApiFn(el)
-              }}
-              leadEditdata={leadEditdata}
-            />
+            {profileData && profileData[0]?.User_Role_Id === 2 && (
+              <CreateLead
+                open={openModal}
+                onClose={() => {
+                  setOpenModal(!openModal)
+                  setLeadEditdata([])
+                }}
+                loading={loading}
+                onSubmit={el => {
+                  createLeadApiFn(el)
+                }}
+                leadEditdata={leadEditdata}
+              />
+            )}
+            {profileData && profileData[0]?.User_Role_Id === 3 && (
+              <ChangeStatus
+                open={openModal}
+                onClose={() => {
+                  setOpenModal(!openModal)
+                  setLeadEditdata([])
+                }}
+                loading={loading}
+                onSubmit={el => {
+                  createLeadApiFn(el)
+                }}
+                leadEditdata={leadEditdata}
+              />
+            )}
             <CollapsibleTable
               count={data?.length}
               leadData={filteredData?.length !== 0 ? filteredData : data}

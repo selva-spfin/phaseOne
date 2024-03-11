@@ -51,38 +51,57 @@ const Page = () => {
             user_name: values.email,
           }
           LoginApi(loginData).then(res => {
-            if (res?.length > 0) {
-             if(res[0].Profile_Status_Id === 6){
-              auth.signIn(res[0]?.user_role)
-              dispatch(setAuthList(res))
-              dispatch(setTargetVal(res[0]?.Target))
-              getLookupData("bank").then(res => {
-                dispatch(setBankList(res))
-              })
+            console.log("res", res)
+            if (res?.statusCode === 200) {
 
-              getLookupData("loan_process_status").then(res => {
-                dispatch(setLoanStatusList(res))
-              })
+              if (res?.data?.length > 0) {
+                if ((res?.data[0].User_Role_Id === 3 && res?.data[0].Profile_Status_Id === 2) || (res?.data[0].User_Role_Id === 2 && res?.data[0].Profile_Status_Id === 6)) {
+                  console.log("res333", res)
+                  auth.signIn(res?.data[0]?.User_Role_Id)
+                  dispatch(setAuthList(res?.data))
+                  dispatch(setTargetVal(res?.data[0]?.Target))
+                  getLookupData("bank").then(res => {
+                    dispatch(setBankList(res))
+                  })
 
-              getLookupData("loan_type").then(res => {
-                dispatch(setLoanTypeList(res))
-              })
+                  getLookupData("loan_process_status").then(res => {
+                    dispatch(setLoanStatusList(res))
+                  })
 
-              getLookupData("profile_status").then(res => {
-                dispatch(setProfileStatusList(res))
-              })
+                  getLookupData("loan_type").then(res => {
+                    dispatch(setLoanTypeList(res))
+                  })
 
-              getLookupData("user_role").then(res => {
-                dispatch(setUserRoleList(res))
-              })
+                  getLookupData("profile_status").then(res => {
+                    dispatch(setProfileStatusList(res))
+                  })
 
-              router.push('/')
-             }else{
-              router.push('/pending')
-             }
+                  getLookupData("user_role").then(res => {
+                    dispatch(setUserRoleList(res))
+                  })
+
+
+
+
+                  if (res?.data[0]?.User_Role_Id === 2) {
+                    router.push('/')
+                  }
+                  if (res?.data[0]?.User_Role_Id === 3) {
+                    router.push('/leads')
+                  }
+
+                } else {
+                  router.push('/pending')
+                }
+              } else {
+                helpers.setErrors({ submit: 'Something wrong, please try again!!!' })
+              }
             } else {
-              helpers.setErrors({ submit: 'Something wrong, please try again!!!' })
+              helpers.setErrors({
+                submit: res?.message
+              })
             }
+
           })
         } else {
           helpers.setErrors({ submit: 'Please check your email and password' })
@@ -185,7 +204,7 @@ const Page = () => {
               <Alert color="primary"
                 severity="info"
                 sx={{ mt: 3 }}>
-                <div style={{display:'flex', flexDirection:'column'}}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <span>
                     If any registration queries please contact us at
                   </span>

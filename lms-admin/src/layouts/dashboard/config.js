@@ -86,14 +86,23 @@ export const items = [
 
 export const items1 = [
   {
-    title: 'Overview',
-    path: '/',
+    title: 'Leads',
+    path: '/leads',
     icon: (
       <SvgIcon fontSize="small">
-        <ChartBarIcon />
+        <ShoppingBagIcon />
       </SvgIcon>
     ),
   },
+  // {
+  //   title: 'Overview',
+  //   path: '/',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <ChartBarIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
   // {
   //   title: 'Customers',
   //   path: '/customers',
@@ -103,24 +112,16 @@ export const items1 = [
   //     </SvgIcon>
   //   ),
   // },
-  {
-    title: 'Leads',
-    path: '/leads',
-    icon: (
-      <SvgIcon fontSize="small">
-        <ShoppingBagIcon />
-      </SvgIcon>
-    ),
-  },
-  {
-    title: 'Account',
-    path: '/account',
-    icon: (
-      <SvgIcon fontSize="small">
-        <UserIcon />
-      </SvgIcon>
-    ),
-  },
+
+  // {
+  //   title: 'Account',
+  //   path: '/account',
+  //   icon: (
+  //     <SvgIcon fontSize="small">
+  //       <UserIcon />
+  //     </SvgIcon>
+  //   ),
+  // },
   // {
   //   title: 'Remainder',
   //   path: '/account',

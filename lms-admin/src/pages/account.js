@@ -29,15 +29,15 @@ const Page = () => (
           </div>
           <div>
             <Grid container
-spacing={3}>
+              spacing={3}>
               <Grid xs={12}
-md={6}
-lg={4}>
+                md={6}
+                lg={4}>
                 <AccountProfile />
               </Grid>
               <Grid xs={12}
-md={6}
-lg={8}>
+                md={6}
+                lg={8}>
                 <AccountProfileDetails />
               </Grid>
             </Grid>

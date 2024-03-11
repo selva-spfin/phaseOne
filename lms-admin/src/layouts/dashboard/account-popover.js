@@ -47,10 +47,16 @@ export const AccountPopover = props => {
         }}
       >
         <Typography variant="overline">Account</Typography>
-        <Typography color="text.secondary"
-          variant="body2">
-          {profileData[0]?.First_Name + "  " + profileData[0]?.Last_Name}
-        </Typography>
+        {profileData[0]?.User_Role_Id === 3 &&
+          <Typography color="text.secondary"
+            variant="body2">
+            {profileData[0]?.Name}
+          </Typography>}
+        {profileData[0]?.User_Role_Id === 2 &&
+          <Typography color="text.secondary"
+            variant="body2">
+            {profileData[0]?.First_Name + "  " + profileData[0]?.Last_Name}
+          </Typography>}
       </Box>
       <Divider />
       <MenuList
