@@ -21,10 +21,10 @@ function Explore() {
   };
   return (
     <div id="explore" className=" px-2 py-14 sm:px-0">
-      <div className="cursor-pointer flex justify-around uppercase text-xl font-medium ">
+      <div className=" flex  cursor-pointer justify-around text-xl font-medium uppercase ">
         {exploreItems?.map((el) => (
           <span
-            className={`${selected === el.id ? "underline underline-offset-4  text-[#EF2670] " : ""}`}
+            className={`${selected === el.id ? "text-[#EF2670] underline  underline-offset-4 " : ""}`}
             onClick={() => setSelected(el.id)}
           >
             {el.name}

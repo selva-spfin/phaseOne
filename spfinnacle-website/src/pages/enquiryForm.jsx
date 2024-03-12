@@ -32,10 +32,10 @@ const EnquiryForm = () => {
 
   return (
     <div id="enquiry-form" style={{ backgroundColor: colors.primaryColor }}>
-      <section className="container mx-auto p-4 lg:flex justify-between items-center  lg:py-8 ">
+      <section className="container mx-auto items-center justify-between p-4 lg:flex  lg:py-8 ">
         <div className="lg:w-2/3 ">
           <p className="text-2xl text-white  ">{para}</p>
-          <div className="lg:mt-[325px]  lg:mb-5">
+          <div className="lg:mb-5  lg:mt-[325px]">
             <Link className="flex gap-10">
               {socialMediaIcons.map((icons) => (
                 <img
@@ -50,7 +50,7 @@ const EnquiryForm = () => {
             <p>PrivacyPolicy & TermsConditions</p>
           </div>
         </div>
-        <div className="  rounded-3xl  bg-white p-5 lg:p-6 lg:w-1/3 h-auto">
+        <div className="  h-auto  rounded-3xl bg-white p-5 lg:w-1/3 lg:p-6">
           <form
             className="flex flex-col"
             action=""
@@ -160,7 +160,7 @@ const EnquiryForm = () => {
           </form>
         </div>
       </section>
-      <div className="size-14 fixed right-5 bottom-8">
+      <div className="fixed bottom-8 right-5 size-14">
         <a
           href="https:/wa.me/+91and8012637346"
           target="_blank"

@@ -10,7 +10,7 @@ import { contents } from "../constants/blog.js";
 const Blog = () => {
   return (
     <div id="blog">
-      <div className="grid  grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {contents.map((content) => (
           <div className=" w-auto gap-4 rounded-lg p-6 shadow-lg">
             <img

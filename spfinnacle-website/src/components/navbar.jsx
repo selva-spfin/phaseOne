@@ -3,7 +3,7 @@ import mainLogo from "../assets/2.png";
 import { TfiMenu } from "react-icons/tfi";
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { loanItems, exploreItems } from "../constants/menus.js";
+import { loanItems } from "../constants/menus.js";
 import { colors } from "../constants/colors.js";
 import { Link, animateScroll as scroll } from "react-scroll";
 

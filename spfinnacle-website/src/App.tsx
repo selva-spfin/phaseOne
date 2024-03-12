@@ -9,7 +9,7 @@ import { useState } from "react";
 import Explore from "./components/explore";
 import WhatsappEnquiry from "./components/whatsappEnquiry";
 
-function App() {
+const App = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
   return (
     <div className="">
@@ -32,6 +32,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;
