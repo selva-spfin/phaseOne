@@ -37,6 +37,19 @@ export async function CreateLeadApi(apiData, setLoader, method) {
   }
 }
 
+export async function updateLeadStatusApi(apiData, setLoader) {
+  setLoader(true)
+  try {
+    const { data } = await axios["put"](api.telecallerLeadStatusChange, apiData)
+    setLoader(false)
+    return data
+  } catch (error) {
+    setLoader(false)
+  }
+}
+
+
+
 export async function CreateAssetApi(assetData, setLoader, method) {
   setLoader(true)
   try {
@@ -55,6 +68,19 @@ export async function getLeadApi(statusId,
   setLoader(true)
   try {
     const { data } = await axios.get(api.addLead + `?user_role_id=${roleId}&user_id=${userId}&status_id=0`)
+    setLoader(false)
+    return data
+  } catch (error) {
+    setLoader(false)
+  }
+}
+
+
+export async function getTelecallerLeadApi(id
+  , setLoader) {
+  setLoader(true)
+  try {
+    const { data } = await axios.get(api.getTelecallerLead + `?Tellecaller_Id=${id}`)
     setLoader(false)
     return data
   } catch (error) {

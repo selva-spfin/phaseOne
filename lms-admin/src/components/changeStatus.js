@@ -33,10 +33,13 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
 
   }
 
+
+  console.log("leadEditdata", leadEditdata)
+
   const validationSchema = Yup.object().shape({
 
-    status: Yup.string().required('Bank Name is required'),
-    reason: Yup.string().required('Loan Type is required'),
+    status: Yup.string().required('status is required'),
+    // reason: Yup.string().required('Loan Type is required'),
 
   })
 
@@ -89,12 +92,13 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
                         onBlur={handleBlur}
                       >
                         <MenuItem value="">Select</MenuItem>
-                        {profileStatus.map(option => (
+                        {profileStatus.filter(filData => Number(filData?.Profile_Status_Id) <= 5).map(option => (
                           <MenuItem key={option?.Profile_Status_Id}
                             value={option?.Profile_Status_Id}>
                             {option?.Status_Name}
                           </MenuItem>
-                        ))}
+                        )
+                        )}
                       </Field>
                       {touched.status && errors.status && (
                         <FormHelperText>{errors.status}</FormHelperText>

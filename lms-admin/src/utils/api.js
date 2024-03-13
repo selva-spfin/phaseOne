@@ -11,6 +11,10 @@ export default {
   lookupApi: BASE_URL + '/api/lookup',
   password: BASE_URL + "/api/partner/password",
   setTarget: BASE_URL + "/api/partner/target",
+  getTelecallerLead: BASE_URL + "/api/admin/tellecaller-leads",
+  telecallerLeadStatusChange: BASE_URL + "/api/tellecaller/leads",
+
+
 }
 
 const baseURL = 'https://efskorntxa.execute-api.ap-south-1.amazonaws.com/Dev';

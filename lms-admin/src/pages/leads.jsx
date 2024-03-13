@@ -17,7 +17,13 @@ import { applyPagination } from 'src/utils/apply-pagination'
 import CreateLead from 'src/components/createLead'
 import ChangeStatus from 'src/components/changeStatus'
 
-import { CreateLeadApi, CreateAssetApi, getLeadApi } from '../action/apiActions'
+import {
+  CreateLeadApi,
+  CreateAssetApi,
+  getLeadApi,
+  getTelecallerLeadApi,
+  updateLeadStatusApi,
+} from '../action/apiActions'
 import { useSelector } from 'react-redux'
 import CollapsibleTable from 'src/sections/customer/collapseRow'
 import { message } from 'antd'
@@ -48,18 +54,27 @@ const Page = () => {
   }, [])
 
   useEffect(() => {
-    getLeadApi(
-      profileData[0]?.Profile_Status_Id,
-      profileData[0]?.User_Id,
-
-      profileData[0]?.User_Role_Id,
-      setLoading
-    ).then(res => {
-      getResult(res)
-    })
+    if (profileData[0]?.User_Role_Id === 3) {
+      getTelecallerLeadApi(profileData[0]?.Tellecaller_Id, setLoading).then(
+        res => {
+          getResult(res)
+        }
+      )
+    } else {
+      getLeadApi(
+        profileData[0]?.Profile_Status_Id,
+        profileData[0]?.User_Id,
+        // 1,
+        profileData[0]?.User_Role_Id,
+        setLoading
+      ).then(res => {
+        getResult(res)
+      })
+    }
   }, [])
 
   const getResult = res => {
+    // console.log('res', res)
     if (res?.statusCode === 200) {
       const resResult = res?.data?.map(data => {
         return {
@@ -209,6 +224,31 @@ const Page = () => {
       setTimeout(() => {
         setOpenModal(false)
       }, 3000)
+    })
+  }
+
+  const LeadStatusChangeApiFn = (dataList, leadEditdata) => {
+    console.log(leadEditdata, dataList)
+    let statusChange = {
+      telecaller_id: profileData[0]?.Tellecaller_Id,
+      change_reason: dataList?.reason,
+      new_status: dataList?.status,
+      lead_id: leadEditdata?.id,
+    }
+    updateLeadStatusApi(statusChange, setLoading).then(res => {
+      if (res?.status === 'success') {
+        message.success(res?.Response)
+        if (profileData[0]?.User_Role_Id === 3) {
+          getTelecallerLeadApi(profileData[0]?.Tellecaller_Id, setLoading).then(
+            res => {
+              getResult(res)
+            }
+          )
+        }
+        setOpenModal(false)
+      } else {
+        message.error('something went wrong please try again after sometime')
+      }
     })
   }
 
@@ -391,7 +431,7 @@ const Page = () => {
                 }}
                 loading={loading}
                 onSubmit={el => {
-                  createLeadApiFn(el)
+                  LeadStatusChangeApiFn(el, leadEditdata)
                 }}
                 leadEditdata={leadEditdata}
               />
