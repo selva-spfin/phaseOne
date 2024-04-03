@@ -28,7 +28,7 @@ export const OverviewTotalCustomers = props => {
               variant="overline">
               Approved Leads
             </Typography>
-            <Typography variant="h4">{value || 0}</Typography>
+            <Typography variant="h5">{value || 0}</Typography>
           </Stack>
           <Avatar
             sx={{

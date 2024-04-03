@@ -9,6 +9,7 @@ import {
   SvgIcon,
   Typography,
   CircularProgress,
+  Skeleton,
 } from '@mui/material'
 import { useSelection } from 'src/hooks/use-selection'
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
@@ -43,8 +44,6 @@ const Page = () => {
   const [filteredData, setFilteredData] = useState(data)
   const profileData = useSelector(state => state.auth.authData)
 
-  console.log('profileData', profileData)
-
   const handlePageChange = useCallback((event, value) => {
     setPage(value)
   }, [])
@@ -74,7 +73,6 @@ const Page = () => {
   }, [])
 
   const getResult = res => {
-    // console.log('res', res)
     if (res?.statusCode === 200) {
       const resResult = res?.data?.map(data => {
         return {
@@ -120,7 +118,7 @@ const Page = () => {
             : [],
         }
       })
-      console.log('resResult', data)
+
       setData(resResult?.reverse())
     } else {
       setData([])
@@ -182,7 +180,6 @@ const Page = () => {
     reader.readAsDataURL(file)
   }
   const imageUpload = async (data, type, LeadId, flag, id) => {
-    console.log('data', data)
     await convertImageToBase64(data, base64String => {
       const assetData = {
         Lead_detail_id: LeadId,
@@ -228,7 +225,6 @@ const Page = () => {
   }
 
   const LeadStatusChangeApiFn = (dataList, leadEditdata) => {
-    console.log(leadEditdata, dataList)
     let statusChange = {
       telecaller_id: profileData[0]?.Tellecaller_Id,
       change_reason: dataList?.reason,
@@ -254,7 +250,7 @@ const Page = () => {
 
   async function createLeadApiFn(LeadData) {
     setLoading(true)
-    console.log('LeadData', LeadData)
+
     const apiData = {
       Employee_Type: LeadData?.Employee_Type,
 

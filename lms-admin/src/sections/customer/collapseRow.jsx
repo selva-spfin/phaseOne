@@ -47,7 +47,6 @@ const GridView = ({ data }) => {
           )
           .map(([key, value]) => (
             <Grid item key={key} xs={12} md={3}>
-              {console.log(key, value)}
               <div className={classes.paper}>
                 <Typography
                   style={{
@@ -65,7 +64,7 @@ const GridView = ({ data }) => {
                         <div key={index}>
                           <a
                             target="_blank"
-                            href={`https://d6zg14cua4cuh.cloudfront.net/${
+                            href={`https://d2qgwmrux35mgy.cloudfront.net/${
                               data.split('#')[1]
                             }`}
                           >

@@ -83,21 +83,22 @@ const iconMap = {
 export const OverviewTraffic = props => {
   const { chartSeries, labels, sx } = props
   const chartOptions = useChartOptions(labels)
+
   return (
     <Card sx={sx}>
       <CardHeader title="Leads Status (Monthly)" />
       <CardContent>
         {
-          chartSeries[0]?.data?.length > 0 ?
-          <Chart
-          height={300}
-          options={chartOptions}
-          series={chartSeries}
-          type="donut"
-          width="100%"
-        />
-        :
-        <h2 style={{textAlign:'center', color:'#2B71B9'}}>No Data</h2>
+          chartSeries?.length > 0 ?
+            <Chart
+              height={300}
+              options={chartOptions}
+              series={chartSeries}
+              type="donut"
+              width="100%"
+            />
+            :
+            <h2 style={{ textAlign: 'center', color: '#2B71B9' }}>No Data</h2>
         }
         <Stack
           alignItems="center"

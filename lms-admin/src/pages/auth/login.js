@@ -51,12 +51,12 @@ const Page = () => {
             user_name: values.email,
           }
           LoginApi(loginData).then(res => {
-            console.log("res", res)
+
             if (res?.statusCode === 200) {
 
               if (res?.data?.length > 0) {
                 if ((res?.data[0].User_Role_Id === 3 && res?.data[0].Profile_Status_Id === 2) || (res?.data[0].User_Role_Id === 2 && res?.data[0].Profile_Status_Id === 6)) {
-                  console.log("res333", res)
+
                   auth.signIn(res?.data[0]?.User_Role_Id)
                   dispatch(setAuthList(res?.data))
                   dispatch(setTargetVal(res?.data[0]?.Target))
@@ -97,9 +97,7 @@ const Page = () => {
                 helpers.setErrors({ submit: 'Something wrong, please try again!!!' })
               }
             } else {
-              helpers.setErrors({
-                submit: res?.message
-              })
+              helpers.setErrors({ submit: 'Please check your email and password' })
             }
 
           })

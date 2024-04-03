@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { subDays, subHours } from 'date-fns'
-import { Box, Container, Unstable_Grid2 as Grid } from '@mui/material'
+import { Box, Container, Unstable_Grid2 as Grid, Skeleton } from '@mui/material'
 import { Layout as DashboardLayout } from 'src/layouts/dashboard/layout'
 import { OverviewBudget } from 'src/sections/overview/overview-budget'
 import { OverviewLatestOrders } from 'src/sections/overview/overview-latest-orders'
@@ -38,14 +38,16 @@ const Page = () => {
       profileData[0]?.User_Role_Id,
       setLoading
     ).then(res => {
+
       if (res?.statusCode === 200)
         var sum = 0;
-      var leadProgress = res?.data ? res.data.filter(filData => filData?.Lead_Status === 1) : []
-      var leadApproved = res?.data ? res.data.filter(filData => filData?.Lead_Status === 2) :[]
-      var leadDecline = res?.data ? res.data.filter(filData => filData?.Lead_Status === 3): []
+      var leadProgress = res?.data ? res.data.filter(filData => filData?.Lead_Status === 1).map(dataF => dataF) : []
+      var leadApproved = res?.data ? res.data.filter(filData => filData?.Lead_Status === 2).map(dataF => dataF) : []
+      var leadDecline = res?.data ? res.data.filter(filData => filData?.Lead_Status === 3).map(dataF => dataF) : []
 
       var leadCount = leadProgress?.length
       var leadStatus = [leadApproved?.length, leadProgress?.length, leadDecline?.length]
+
 
       setLeadStatus(leadStatus)
 
@@ -69,7 +71,7 @@ const Page = () => {
 
       }
       let monthlyData = [];
-      if(res?.data){
+      if (res?.data) {
         monthlyData = getDataByMonths(res?.data) || [];
         monthlyData.length > 0 && setLeadCountByMonth(monthlyData);
       }
@@ -79,11 +81,12 @@ const Page = () => {
 
   const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 
-  const filterDataByMonth = (month, data=[]) => {
+  const filterDataByMonth = (month, data = []) => {
     return data?.filter(item => Number(item.Generated_On.split("/")[1]) === Number(month));
   };
 
   const getDataByMonths = (data) => {
+
     const monthlyData = [];
     for (let month = 1; month <= 12; month++) {
       const filteredData = filterDataByMonth(month, data);
@@ -101,9 +104,22 @@ const Page = () => {
       <Head>
         <title>Overview</title>
       </Head>
+      {loading &&
+        <center style={{ margin: "200px", marginTop: "0px", marginLeft: "20px" }}>
+          <Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton />
+
+
+
+          <Skeleton variant="rounded" width={1000} height={160} style={{ marginTop: "20px" }} />
+          <Skeleton style={{ marginTop: "20px" }} /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton />
+          <Skeleton variant="rounded" width={1000} height={160} style={{ marginTop: "20px" }} />
+          <Skeleton style={{ marginTop: "20px" }} /><Skeleton /><Skeleton /><Skeleton /><Skeleton /><Skeleton />
+
+
+        </center>}
       <Box
         component="main"
-        style={{backgroundColor:'#EFEFEF'}}
+        style={{ backgroundColor: '#EFEFEF' }}
         sx={{
           flexGrow: 1,
           py: 12,

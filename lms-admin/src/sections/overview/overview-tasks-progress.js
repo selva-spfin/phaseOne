@@ -25,11 +25,11 @@ export const OverviewTasksProgress = props => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary"
-gutterBottom
-variant="overline">
+              gutterBottom
+              variant="overline">
               Target Completion
             </Typography>
-            <Typography variant="h4">{value || 0}%</Typography>
+            <Typography variant="h5">{value || 0}%</Typography>
           </Stack>
           <Avatar
             sx={{
@@ -45,7 +45,7 @@ variant="overline">
         </Stack>
         <Box sx={{ mt: 3 }}>
           <LinearProgress value={value}
-variant="determinate" />
+            variant="determinate" />
         </Box>
       </CardContent>
     </Card>

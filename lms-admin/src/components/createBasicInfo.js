@@ -4,6 +4,13 @@ import React, { useState, useEffect } from 'react'
 import { Field, ErrorMessage } from 'formik'
 import { TextField, Button, Grid } from '@mui/material'
 import { message } from 'antd'
+import {
+  checkPhoneNumber,
+  checkEmail
+
+} from '../action/apiActions'
+import useDebounce from './useDebounce';
+
 
 const PersonalInfoStep = ({
   setActiveFlag,
@@ -19,11 +26,72 @@ const PersonalInfoStep = ({
   const [seconds, setSeconds] = useState(30)
   const [mobileNumber, setMobileNumber] = useState('')
   const [otpVerify, setOtpVerify] = useState('')
+  const [emailId, setEmailId] = useState()
+  const [flag, setFlag] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSendOtp = data => {
-    setOtpSent(prevOtpSent => !prevOtpSent)
-    resendOTP()
+
+
+  const debouncedEmail = useDebounce(emailId, 500);
+
+
+  useEffect(() => {
+    if (debouncedEmail) {
+      setIsLoading(true);
+      // Assuming checkEmailAvailability is a function that sends a request to check if the email is available
+      checkEmailAvailability(debouncedEmail)
+        .then((response) => {
+          // setIsEmailAvailable(response.available);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error('Error checking email availability:', error);
+          setIsLoading(false);
+        });
+    }
+  }, [debouncedEmail]);
+
+
+
+
+  const EmailCheckValidation = (val) => {
+
+    // setEmailId(val)
+    if (val?.value.includes(".com")) {
+      setFlag(true)
+
+      checkEmail(val?.value).then(res => {
+        if (res?.data[0]?.Response === "Already Exists") {
+
+          message.error('Email Id already exists');
+        }
+      })
+
+
+    } else {
+      setFlag(false)
+    }
+
+
   }
+  const handleSendOtp = async () => {
+    if (mobileNumber.length === 10) {
+      // setOtpSent(false);
+      checkPhoneNumber(mobileNumber).then(res => {
+        if (res?.data[0]?.Response === "Not Exists") {
+          setOtpSent(true);
+          resendOTP();
+        } else {
+          message.error('phone number already exists');
+          setOtpSent(false);
+        }
+      })
+    } else {
+      message.error('Invalid phone number');
+      setOtpSent(false);
+    }
+  };
+
 
   const verifyFn = () => {
     setActiveFlag(true)
@@ -113,6 +181,11 @@ const PersonalInfoStep = ({
             variant="outlined"
             fullWidth
             margin="normal"
+          // onChange={(event) => {
+          //   // Handle field changes here if needed
+          //   console.log('Field changed:', event.target.value);
+          // }}
+
           />
           <ErrorMessage
             style={{ color: 'red', fontSize: 'smaller' }}
@@ -244,9 +317,17 @@ const PersonalInfoStep = ({
           {({ field }) => {
             if (Number(field.value)) {
               setMobileNumber(field.value)
+              // handleSendOtp()
+
             } else {
               setMobileNumber(0)
             }
+          }}
+        </Field>
+
+        <Field name="email">
+          {({ field }) => {
+            setEmailId(field)
           }}
         </Field>
 

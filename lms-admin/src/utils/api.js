@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const BASE_URL =
-  'https://efskorntxa.execute-api.ap-south-1.amazonaws.com/Dev'
+  'https://udp8ytsf37.execute-api.ap-south-1.amazonaws.com/Prod'
 
 export default {
   partnerSingUp: BASE_URL + '/api/partner',
@@ -13,6 +13,10 @@ export default {
   setTarget: BASE_URL + "/api/partner/target",
   getTelecallerLead: BASE_URL + "/api/admin/tellecaller-leads",
   telecallerLeadStatusChange: BASE_URL + "/api/tellecaller/leads",
+
+  checkEmail: BASE_URL + "/api/admin/email",
+  CheckPhoneNumber: BASE_URL + "/api/admin/mobilenumber",
+
 
 
 }

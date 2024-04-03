@@ -204,6 +204,8 @@ const Page = () => {
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
       ) {
         errors.email = 'Invalid email address'
+      } else {
+        console.log("eeeeeeeemail.", values.email)
       }
 
       if (!values.phoneNumber) {
@@ -301,7 +303,7 @@ const Page = () => {
                     ? validateVerificationInfo
                     : activeStep === 2 && validateAuthInfo
               }
-              onSubmit={(values, helpers) => {
+              onSubmit={(values, actions) => {
 
                 let data = {
                   Email_Id: values.email,
@@ -323,6 +325,8 @@ const Page = () => {
                   Pincode: values.PinCode,
                   Door_no: values.doorNumber,
                 }
+
+                actions.setSubmitting(false);
                 // if (activeStep === 2) {
                 partnerSingUp(data, setLoading).then(res => {
 

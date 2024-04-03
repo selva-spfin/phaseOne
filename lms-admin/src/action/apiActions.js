@@ -125,6 +125,29 @@ export async function targetChanges(apiData) {
 }
 
 
+export async function checkPhoneNumber(apiData) {
+
+  try {
+    const { data } = await axios.get(`${api.CheckPhoneNumber}?check_number=${apiData}`)
+
+    return data
+  } catch (error) {
+    console.error("error")
+  }
+}
+
+export async function checkEmail(apiData) {
+
+  try {
+    const { data } = await axios.get(`${api.checkEmail}?check_email=${apiData}`)
+
+    return data
+  } catch (error) {
+    console.error("error")
+  }
+}
+
+
 
 
 

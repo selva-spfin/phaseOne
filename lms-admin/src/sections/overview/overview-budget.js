@@ -33,7 +33,7 @@ export const OverviewBudget = props => {
               variant="overline">
               Target Loan Amount
             </Typography>
-            <Typography variant="h4">{value || 0}</Typography>
+            <Typography variant="h5">{value || 0}</Typography>
           </Stack>
           <Avatar
             sx={{

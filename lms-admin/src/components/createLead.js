@@ -170,12 +170,11 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
   }]
 
 
-  console.log("payslips", initialValues?.payslips)
 
 
   const handlePayslipUpload = (info, setFieldValue) => {
     const { file, fileList } = info;
-    // console.log("fileList", fileList)
+
 
     let isFileTypeAllowed = true;
 
@@ -197,7 +196,7 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
       setFieldValue('payslips', fileList);
     } else {
       message.error('You can only upload PNG, JPEG, or PDF files!');
-      // console.log("fileListfileList", fileList)
+
       // fileList.splice(1);
       // setFieldValue('payslips', fileList);
     }
@@ -209,7 +208,7 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
     let isFileTypeAllowed = true;
 
 
-    console.log("fileList", fileList)
+
 
 
     // Iterate over each file in the fileList array
@@ -609,7 +608,7 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
                             beforeUpload={() => false} // Prevent default upload behavior
                             onChange={info => {
                               handlePayslipUpload(info, setFieldValue)
-                              console.log("iiiiiiino", info)
+
                             }
                             }
                             fileList={values.payslips}

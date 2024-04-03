@@ -34,7 +34,7 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
   }
 
 
-  console.log("leadEditdata", leadEditdata)
+
 
   const validationSchema = Yup.object().shape({
 
@@ -46,7 +46,6 @@ const CreateLead = ({ open, onClose, loading, onSubmit, leadEditdata }) => {
 
   const profileStatus = useSelector(state => state.Lookup.profileStatusData);
 
-  console.log("profileStatus", profileStatus)
 
 
 
