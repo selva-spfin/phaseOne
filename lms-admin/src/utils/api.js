@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const BASE_URL =
-  'https://udp8ytsf37.execute-api.ap-south-1.amazonaws.com/Prod'
+  'https://efskorntxa.execute-api.ap-south-1.amazonaws.com/Dev'
 
 export default {
   partnerSingUp: BASE_URL + '/api/partner',

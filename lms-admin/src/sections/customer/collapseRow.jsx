@@ -64,7 +64,7 @@ const GridView = ({ data }) => {
                         <div key={index}>
                           <a
                             target="_blank"
-                            href={`https://d2qgwmrux35mgy.cloudfront.net/${
+                            href={`https://d6zg14cua4cuh.cloudfront.net/${
                               data.split('#')[1]
                             }`}
                           >
