@@ -32,24 +32,24 @@ const PersonalInfoStep = ({
 
 
 
-  const debouncedEmail = useDebounce(emailId, 500);
+  // const debouncedEmail = useDebounce(emailId, 500);
 
 
-  useEffect(() => {
-    if (debouncedEmail) {
-      setIsLoading(true);
-      // Assuming checkEmailAvailability is a function that sends a request to check if the email is available
-      checkEmailAvailability(debouncedEmail)
-        .then((response) => {
-          // setIsEmailAvailable(response.available);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error('Error checking email availability:', error);
-          setIsLoading(false);
-        });
-    }
-  }, [debouncedEmail]);
+  // useEffect(() => {
+  //   if (debouncedEmail) {
+  //     setIsLoading(true);
+  //     // Assuming checkEmailAvailability is a function that sends a request to check if the email is available
+  //     checkEmailAvailability(debouncedEmail)
+  //       .then((response) => {
+  //         // setIsEmailAvailable(response.available);
+  //         setIsLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error checking email availability:', error);
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, [debouncedEmail]);
 
 
 
@@ -325,13 +325,13 @@ const PersonalInfoStep = ({
           }}
         </Field>
 
-        <Field name="email">
+        {/* <Field name="email">
           {({ field }) => {
             setEmailId(field)
           }}
-        </Field>
+        </Field> */}
 
-        <Field name="PAN">{({ field }) => { }}</Field>
+        {/* <Field name="PAN">{({ field }) => { }}</Field> */}
 
         <Field name="otp">{({ field }) => setOtpVerify(field.value)}</Field>
       </Grid>
